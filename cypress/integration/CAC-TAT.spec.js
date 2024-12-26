@@ -142,4 +142,15 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
         expect($input[0].files[0].name).to.equal('example.json')
     })
  })
+ it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', function(){
+    cy.get('#privacy a').should('have.attr', 'target', '_blank')
+ })
+ it('acessa a pagina da politica de privacidade removendo o target e então clicando no link', function(){
+    cy.get('#privacy a')
+    .invoke('removeAttr', 'target')
+    .click()
+    
+    cy.contains('Talking About Test').should('be.visible')
 })
+})
+
