@@ -76,4 +76,30 @@ it('envia o formuário com sucesso usando o cy.contains', function() { //definin
     cy.contains('button','Enviar').click()
     cy.get('.success').should('be.visible')
  })
+ it('seleciona um produto (youtube) por seu texto', function() {
+    cy.get('#product')
+    .select('YouTube')
+    .should('have.value', 'youtube')
+ })
+it('seleciona um produto (Mentoria) por seu valor (value)', function(){
+    cy.get('#product')
+    .select('mentoria')
+    .should('have.value', 'mentoria')
+})
+it('seleciona um produto (Blog) por seu indice', function(){
+    cy.get('#product')
+    .select(1)
+    .should('have.value', 'blog')
+})
+it('marca o tipo de atendimento "Feedbback"', function(){
+    cy.get('input[type="radio"][value="feedback"]').check().should('be.checked')
+})
+it('marca cada tipo de atendimento', function(){
+    cy.get('input[type="radio"]')
+    .should('have.length', 3)
+    .each(function($radio) {
+    cy.wrap($radio).check()    
+    cy.wrap($radio).should('be.checked')
+    })
+})
 })
